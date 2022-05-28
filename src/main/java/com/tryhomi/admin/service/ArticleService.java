@@ -1,7 +1,7 @@
 
 package com.tryhomi.admin.service;
 
-import org.apache.commons.lang3.ArrayUtils;
+import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,6 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.MessageCodesResolver;
-import com.tryhomi.admin.autoconfigure.WallRideCacheConfiguration;
-import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import com.tryhomi.admin.domain.*;
 import com.tryhomi.admin.exception.DuplicateCodeException;
 import com.tryhomi.admin.exception.EmptyCodeException;
@@ -35,7 +33,6 @@ import com.tryhomi.admin.model.*;
 import com.tryhomi.admin.repository.*;
 import com.tryhomi.admin.support.AuthorizedUser;
 import com.tryhomi.admin.support.CodeFormatter;
-import com.tryhomi.admin.web.controller.admin.article.CustomFieldValueEditForm;
 
 import javax.annotation.Resource;
 
@@ -80,7 +77,7 @@ public class ArticleService {
 
 	private static Logger logger = LoggerFactory.getLogger(ArticleService.class);
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public Article createArticle(ArticleCreateRequest request, Post.Status status, AuthorizedUser authorizedUser) {
 		LocalDateTime now = LocalDateTime.now();
 
@@ -223,7 +220,7 @@ public class ArticleService {
 		return articleRepository.save(article);
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public Article saveArticleAsDraft(ArticleUpdateRequest request, AuthorizedUser authorizedUser) {
 		postRepository.lock(request.getId());
 		Article article = articleRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -274,7 +271,7 @@ public class ArticleService {
 		}
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public Article saveArticleAsPublished(ArticleUpdateRequest request, AuthorizedUser authorizedUser) {
 		postRepository.lock(request.getId());
 		Article article = articleRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -293,7 +290,7 @@ public class ArticleService {
 		return published;
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public Article saveArticleAsUnpublished(ArticleUpdateRequest request, AuthorizedUser authorizedUser) {
 		postRepository.lock(request.getId());
 		Article article = articleRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -312,7 +309,7 @@ public class ArticleService {
 		return unpublished;
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public Article saveArticle(ArticleUpdateRequest request, AuthorizedUser authorizedUser) {
 		postRepository.lock(request.getId());
 		Article article = articleRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -467,7 +464,7 @@ public class ArticleService {
 		return articleRepository.save(article);
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public Article deleteArticle(ArticleDeleteRequest request, BindingResult result) throws BindException {
 		postRepository.lock(request.getId());
 		Article article = articleRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -475,7 +472,7 @@ public class ArticleService {
 		return article;
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public List<Article> bulkPublishArticle(ArticleBulkPublishRequest request, AuthorizedUser authorizedUser) {
 		List<Article> articles = new ArrayList<>();
 		for (long id : request.getIds()) {
@@ -521,7 +518,7 @@ public class ArticleService {
 		return articles;
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public List<Article> bulkUnpublishArticle(ArticleBulkUnpublishRequest request, AuthorizedUser authorizedUser) {
 		List<Article> articles = new ArrayList<>();
 		for (long id : request.getIds()) {
@@ -542,7 +539,7 @@ public class ArticleService {
 	}
 
 	@Transactional(propagation=Propagation.NOT_SUPPORTED)
-	@CacheEvict(value = WallRideCacheConfiguration.ARTICLE_CACHE, allEntries = true)
+
 	public List<Article> bulkDeleteArticle(ArticleBulkDeleteRequest bulkDeleteRequest, BindingResult result) {
 		List<Article> articles = new ArrayList<>();
 		for (long id : bulkDeleteRequest.getIds()) {
@@ -587,7 +584,7 @@ public class ArticleService {
 		return getArticles(request, pageable);
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.ARTICLE_CACHE)
+
 	public Page<Article> getArticles(ArticleSearchRequest request, Pageable pageable) {
 		return articleRepository.search(request, pageable);
 	}
@@ -606,12 +603,12 @@ public class ArticleService {
 		return articles;
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.ARTICLE_CACHE)
+
 	public SortedSet<Article> getArticlesByCategoryCode(String language, String code, Post.Status status) {
 		return getArticlesByCategoryCode(language, code, status, 10);
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.ARTICLE_CACHE)
+
 	public SortedSet<Article> getArticlesByCategoryCode(String language, String code, Post.Status status, int size) {
 		ArticleSearchRequest request = new ArticleSearchRequest()
 				.withLanguage(language)
@@ -623,7 +620,7 @@ public class ArticleService {
 		return new TreeSet<>(page.getContent());
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.ARTICLE_CACHE)
+
 	public SortedSet<Article> getLatestArticles(String language, Post.Status status, int size) {
 		ArticleSearchRequest request = new ArticleSearchRequest()
 				.withLanguage(language)
@@ -642,7 +639,7 @@ public class ArticleService {
 		return articleRepository.findOneByIdAndLanguage(id, language);
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.ARTICLE_CACHE)
+
 	public Article getArticleByCode(String code, String language) {
 		return articleRepository.findOneByCodeAndLanguage(code, language);
 	}

@@ -2,11 +2,11 @@
 
 package com.tryhomi.admin.web.support;
 
+import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.thymeleaf.context.IExpressionContext;
-import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import com.tryhomi.admin.domain.Blog;
 import com.tryhomi.admin.domain.User;
 

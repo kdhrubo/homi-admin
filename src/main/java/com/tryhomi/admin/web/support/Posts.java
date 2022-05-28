@@ -2,6 +2,7 @@
 
 package com.tryhomi.admin.web.support;
 
+import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -10,7 +11,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.thymeleaf.context.IExpressionContext;
-import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import com.tryhomi.admin.domain.*;
 import com.tryhomi.admin.support.PostUtils;
 

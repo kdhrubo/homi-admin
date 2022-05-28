@@ -13,7 +13,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.servlet.view.RedirectView;
 import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.util.UrlPathHelper;
-import com.tryhomi.admin.autoconfigure.WallRideServletConfiguration;
 import com.tryhomi.admin.domain.Blog;
 import com.tryhomi.admin.domain.BlogLanguage;
 import com.tryhomi.admin.service.BlogService;
@@ -98,9 +97,11 @@ public class DefaultModelAttributeInterceptor extends HandlerInterceptorAdapter 
 
 	private String buildAdminPath(String currentLanguage) {
 //		String contextPath = request.getContextPath();
-		UriComponentsBuilder builder = UriComponentsBuilder.fromPath(WallRideServletConfiguration.ADMIN_SERVLET_PATH);
-		builder.path("/{language}");
-		return builder.buildAndExpand(currentLanguage).toUriString();
+		//UriComponentsBuilder builder = UriComponentsBuilder.fromPath(WallRideServletConfiguration.ADMIN_SERVLET_PATH);
+		//builder.path("/{language}");
+		//return builder.buildAndExpand(currentLanguage).toUriString();
+
+		return null;
 	}
 
 	private Map<String, String> buildLanguageLinks(String currentLanguage, List<String> languages, HttpServletRequest request) {

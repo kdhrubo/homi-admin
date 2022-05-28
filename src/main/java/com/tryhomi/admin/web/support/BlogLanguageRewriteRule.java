@@ -6,7 +6,6 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.web.util.UrlPathHelper;
 import org.tuckey.web.filters.urlrewrite.extend.RewriteMatch;
 import org.tuckey.web.filters.urlrewrite.extend.RewriteRule;
-import com.tryhomi.admin.autoconfigure.WallRideServletConfiguration;
 import com.tryhomi.admin.domain.Blog;
 import com.tryhomi.admin.domain.BlogLanguage;
 import com.tryhomi.admin.service.BlogService;
@@ -35,10 +34,11 @@ public class BlogLanguageRewriteRule extends RewriteRule {
 		UrlPathHelper urlPathHelper = new UrlPathHelper();
 
 		String servletPath = urlPathHelper.getOriginatingServletPath(request);
+		/*
 		if (ObjectUtils.nullSafeEquals(servletPath, WallRideServletConfiguration.ADMIN_SERVLET_PATH)) {
 			return null;
 		}
-
+		*
 		String lookupPath = urlPathHelper.getLookupPathForRequest(request);
 
 		Blog blog = blogService.getBlogById(Blog.DEFAULT_ID);
@@ -59,5 +59,8 @@ public class BlogLanguageRewriteRule extends RewriteRule {
 		}
 
 		return new BlogLanguageRewriteMatch(matchedBlogLanguage);
+	}
+	*/
+		return null;
 	}
 }

@@ -19,7 +19,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -27,34 +26,17 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import org.springframework.web.util.UriComponents;
-import org.springframework.web.util.UriComponentsBuilder;
-import com.tryhomi.admin.autoconfigure.WallRideCacheConfiguration;
 import com.tryhomi.admin.domain.*;
-import com.tryhomi.admin.exception.GoogleAnalyticsException;
 import com.tryhomi.admin.exception.ServiceException;
 import com.tryhomi.admin.model.PostSearchRequest;
 import com.tryhomi.admin.repository.PopularPostRepository;
 import com.tryhomi.admin.repository.PostRepository;
-import com.tryhomi.admin.support.GoogleAnalyticsUtils;
-import com.tryhomi.admin.web.controller.guest.article.ArticleDescribeController;
-import com.tryhomi.admin.web.controller.guest.page.PageDescribeController;
-import com.tryhomi.admin.web.support.BlogLanguageRewriteMatch;
-import com.tryhomi.admin.web.support.BlogLanguageRewriteRule;
 
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Predicate;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import java.io.IOException;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -94,8 +76,8 @@ public class PostService {
 		}
 
 		if (!CollectionUtils.isEmpty(posts)) {
-			cacheManager.getCache(WallRideCacheConfiguration.ARTICLE_CACHE).clear();
-			cacheManager.getCache(WallRideCacheConfiguration.PAGE_CACHE).clear();
+			//cacheManager.getCache(WallRideCacheConfiguration.ARTICLE_CACHE).clear();
+			//cacheManager.getCache(WallRideCacheConfiguration.PAGE_CACHE).clear();
 		}
 
 		return posts;
@@ -131,7 +113,7 @@ public class PostService {
 	 * @param maxRank
 	 * @see PostService#getPopularPosts(String, PopularPost.Type)
 	 */
-	@CacheEvict(value = WallRideCacheConfiguration.POPULAR_POST_CACHE, key = "'list.type.' + #blogLanguage.language + '.' + #type")
+
 	public void updatePopularPosts(BlogLanguage blogLanguage, PopularPost.Type type, int maxRank) {
 		logger.info("Start update of the popular posts");
 
@@ -295,7 +277,7 @@ public class PostService {
 	 * @return
 	 * @see PostService#updatePopularPosts(BlogLanguage, PopularPost.Type, int)
 	 */
-	@Cacheable(value = WallRideCacheConfiguration.POPULAR_POST_CACHE, key = "'list.type.' + #language + '.' + #type")
+
 	public SortedSet<PopularPost> getPopularPosts(String language, PopularPost.Type type) {
 		/*
 		Specification<PopularPost> spec = (root, query, cb) -> {

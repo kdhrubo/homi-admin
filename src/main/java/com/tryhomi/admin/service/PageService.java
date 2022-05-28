@@ -2,7 +2,7 @@
 
 package com.tryhomi.admin.service;
 
-import org.apache.commons.lang3.ArrayUtils;
+import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +24,6 @@ import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.MessageCodesResolver;
-import com.tryhomi.admin.autoconfigure.WallRideCacheConfiguration;
-import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import com.tryhomi.admin.domain.*;
 import com.tryhomi.admin.exception.DuplicateCodeException;
 import com.tryhomi.admin.exception.EmptyCodeException;
@@ -34,7 +32,6 @@ import com.tryhomi.admin.model.*;
 import com.tryhomi.admin.repository.*;
 import com.tryhomi.admin.support.AuthorizedUser;
 import com.tryhomi.admin.support.CodeFormatter;
-import com.tryhomi.admin.web.controller.admin.article.CustomFieldValueEditForm;
 
 import javax.annotation.Resource;
 import javax.persistence.EntityManager;
@@ -76,7 +73,7 @@ public class PageService {
 
 	private static Logger logger = LoggerFactory.getLogger(PageService.class);
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
+
 	public Page createPage(PageCreateRequest request, Post.Status status, AuthorizedUser authorizedUser) {
 		LocalDateTime now = LocalDateTime.now();
 
@@ -288,7 +285,6 @@ public class PageService {
 		}
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
 	public Page savePageAsPublished(PageUpdateRequest request, AuthorizedUser authorizedUser) {
 		postRepository.lock(request.getId());
 		Page page = pageRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -302,7 +298,6 @@ public class PageService {
 		return savePage(request, authorizedUser);
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
 	public Page savePageAsUnpublished(PageUpdateRequest request, AuthorizedUser authorizedUser) {
 		postRepository.lock(request.getId());
 		Page page = pageRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -317,7 +312,6 @@ public class PageService {
 		return savePage(request, authorizedUser);
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
 	public Page savePage(PageUpdateRequest request, AuthorizedUser authorizedUser) {
 		postRepository.lock(request.getId());
 		Page page = pageRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -495,7 +489,6 @@ public class PageService {
 		return pageRepository.save(page);
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
 	public void updatePageHierarchy(List<Map<String, Object>> data, String language) {
 		for (int i = 0; i < data.size(); i++) {
 			Map<String, Object> map = data.get(i);
@@ -518,7 +511,6 @@ public class PageService {
 		}
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
 	public Page deletePage(PageDeleteRequest request, BindingResult result) throws BindException {
 		postRepository.lock(request.getId());
 		Page page = pageRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -538,7 +530,6 @@ public class PageService {
 		return page;
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
 	public Page deletePage(long id, String language) {
 		postRepository.lock(id);
 		Page page = pageRepository.findOneByIdAndLanguage(id, language);
@@ -558,7 +549,6 @@ public class PageService {
 		return page;
 	}
 
-	@CacheEvict(value = WallRideCacheConfiguration.PAGE_CACHE, allEntries = true)
 	@Transactional(propagation = Propagation.NOT_SUPPORTED)
 	public List<Page> bulkDeletePage(PageBulkDeleteRequest bulkDeleteRequest, BindingResult result) {
 		List<Page> pages = new ArrayList<>();
@@ -597,22 +587,22 @@ public class PageService {
 		return pageRepository.searchForId(request);
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.PAGE_CACHE)
+
 	public org.springframework.data.domain.Page<Page> getPages(PageSearchRequest request) {
 		return getPages(request, Pageable.unpaged());
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.PAGE_CACHE)
+
 	public org.springframework.data.domain.Page<Page> getPages(PageSearchRequest request, Pageable pageable) {
 		return pageRepository.search(request, pageable);
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.PAGE_CACHE)
+
 	public List<Page> getPathPages(Page page) {
 		return getPathPages(page, false);
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.PAGE_CACHE)
+
 	public List<Page> getPathPages(Page page, boolean includeUnpublished) {
 		return pageRepository.findAll(PageSpecifications.path(page, includeUnpublished));
 	}
@@ -641,7 +631,7 @@ public class PageService {
 		return pageRepository.findOneByIdAndLanguage(id, language);
 	}
 
-	@Cacheable(value = WallRideCacheConfiguration.PAGE_CACHE)
+
 	public Page getPageByCode(String code, String language) {
 		return pageRepository.findOneByCodeAndLanguage(code, language);
 	}

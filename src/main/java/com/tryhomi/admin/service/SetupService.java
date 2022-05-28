@@ -20,7 +20,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.tryhomi.admin.autoconfigure.WallRideCacheConfiguration;
 import com.tryhomi.admin.domain.Blog;
 import com.tryhomi.admin.domain.BlogLanguage;
 import com.tryhomi.admin.domain.User;
@@ -43,7 +42,6 @@ public class SetupService {
 	@Resource
 	private BlogRepository blogRepository;
 
-	@CacheEvict(value = {WallRideCacheConfiguration.USER_CACHE, WallRideCacheConfiguration.BLOG_CACHE}, allEntries = true)
 	public User setup(SetupRequest request) {
 		LocalDateTime now = LocalDateTime.now();
 

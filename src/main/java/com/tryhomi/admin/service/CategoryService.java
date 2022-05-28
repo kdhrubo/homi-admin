@@ -1,18 +1,4 @@
-/*
- * Copyright 2014 Tagbangers, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.tryhomi.admin.service;
 
@@ -22,11 +8,9 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
-import com.tryhomi.admin.autoconfigure.WallRideCacheConfiguration;
 import com.tryhomi.admin.domain.Category;
 //import com.tryhomi.admin.domain.Category_;
 import com.tryhomi.admin.exception.ServiceException;
@@ -34,7 +18,6 @@ import com.tryhomi.admin.model.CategoryCreateRequest;
 import com.tryhomi.admin.model.CategorySearchRequest;
 import com.tryhomi.admin.model.CategoryUpdateRequest;
 import com.tryhomi.admin.repository.CategoryRepository;
-import com.tryhomi.admin.repository.CategorySpecifications;
 import com.tryhomi.admin.support.AuthorizedUser;
 import com.tryhomi.admin.support.CodeFormatter;
 
@@ -50,7 +33,7 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 
-	@CacheEvict(value = {WallRideCacheConfiguration.ARTICLE_CACHE, WallRideCacheConfiguration.PAGE_CACHE}, allEntries = true)
+
 	public Category createCategory(CategoryCreateRequest request, AuthorizedUser authorizedUser) {
 		Category category = new Category();
 
@@ -89,7 +72,7 @@ public class CategoryService {
 		return categoryRepository.save(category);
 	}
 
-	@CacheEvict(value = {WallRideCacheConfiguration.ARTICLE_CACHE, WallRideCacheConfiguration.PAGE_CACHE}, allEntries = true)
+
 	public Category updateCategory(CategoryUpdateRequest request, AuthorizedUser authorizedUser) {
 		categoryRepository.lock(request.getId());
 		Category category = categoryRepository.findOneByIdAndLanguage(request.getId(), request.getLanguage());
@@ -134,7 +117,7 @@ public class CategoryService {
 		return categoryRepository.save(category);
 	}
 
-	@CacheEvict(value = {WallRideCacheConfiguration.ARTICLE_CACHE, WallRideCacheConfiguration.PAGE_CACHE}, allEntries = true)
+
 	public void updateCategoryHierarchy(List<Map<String, Object>> data, String language) {
 		for (int i = 0; i < data.size(); i++) {
 			Map<String, Object> map = data.get(i);
@@ -155,7 +138,7 @@ public class CategoryService {
 		}
 	}
 
-	@CacheEvict(value = {WallRideCacheConfiguration.ARTICLE_CACHE, WallRideCacheConfiguration.PAGE_CACHE}, allEntries = true)
+
 	public Category deleteCategory(long id, String language) {
 		categoryRepository.lock(id);
 		Category category = categoryRepository.findOneByIdAndLanguage(id, language);
