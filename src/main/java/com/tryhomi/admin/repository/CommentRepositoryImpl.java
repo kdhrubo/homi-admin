@@ -5,20 +5,13 @@ package com.tryhomi.admin.repository;
 import com.tryhomi.admin.domain.Comment;
 import com.tryhomi.admin.model.CommentSearchRequest;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
-import org.apache.lucene.queryparser.classic.ParseException;
-import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
-import org.hibernate.search.jpa.FullTextEntityManager;
-import org.hibernate.search.jpa.FullTextQuery;
-import org.hibernate.search.jpa.Search;
-import org.hibernate.search.query.dsl.BooleanJunction;
-import org.hibernate.search.query.dsl.QueryBuilder;
+
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -42,6 +35,7 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
 
 	@Override
 	public Page<Comment> search(CommentSearchRequest request, Pageable pageable) {
+		/*
 		FullTextEntityManager fullTextEntityManager =  Search.getFullTextEntityManager(entityManager);
 		QueryBuilder qb = fullTextEntityManager.getSearchFactory()
 				.buildQueryBuilder()
@@ -121,5 +115,9 @@ public class CommentRepositoryImpl implements CommentRepositoryCustom {
 		@SuppressWarnings("unchecked")
 		List<Comment> results = persistenceQuery.getResultList();
 		return new PageImpl<>(results, pageable, resultSize);
+	}
+
+		 */
+		return null;
 	}
 }

@@ -5,8 +5,7 @@ package com.tryhomi.admin.domain;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.search.annotations.*;
-import org.hibernate.search.annotations.Index;
+
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -24,8 +23,7 @@ import java.time.LocalDateTime;
 @Table(name = "comment")
 @DynamicInsert
 @DynamicUpdate
-@Analyzer(definition = "synonyms")
-@Indexed
+
 @SuppressWarnings("serial")
 public class Comment extends DomainObject<Long> implements Comparable<Comment> {
 
@@ -34,37 +32,25 @@ public class Comment extends DomainObject<Long> implements Comparable<Comment> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Field(name = "sortId", analyze = Analyze.NO, index = Index.NO)
-	@SortableField(forField = "sortId")
 	private long id;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@IndexedEmbedded(includeEmbeddedObjectId = true)
 	private Post post;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@IndexedEmbedded(includeEmbeddedObjectId = true)
 	private User author;
 
 	@Column(length = 200, nullable = false)
-	@Field
 	private String authorName;
 
 	@Column(nullable = false)
-	@Fields({
-			@Field,
-			@Field(name = "sortDate", analyze = Analyze.NO, index = Index.NO)
-	})
-	@SortableField(forField = "sortDate")
 	private LocalDateTime date;
 
 	@Lob
 	@Column(nullable = false)
-	@Field
 	private String content;
 
 	@Column(nullable = false)
-	@Field
 	private boolean approved;
 
 	@Override

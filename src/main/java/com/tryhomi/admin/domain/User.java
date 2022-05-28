@@ -1,25 +1,10 @@
-/*
- * Copyright 2014 Tagbangers, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.tryhomi.admin.domain;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SortNatural;
-import org.hibernate.search.annotations.*;
 import org.springframework.util.DigestUtils;
 
 import javax.persistence.*;
@@ -40,7 +25,6 @@ import java.util.TreeSet;
 @Table(name = "user")
 @DynamicInsert
 @DynamicUpdate
-@Indexed
 @SuppressWarnings("serial")
 public class User extends DomainObject<Long> {
 
@@ -56,12 +40,9 @@ public class User extends DomainObject<Long> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Field(name = "sortId", analyze = Analyze.NO, index = org.hibernate.search.annotations.Index.NO)
-	@SortableField(forField = "sortId")
 	private long id;
 
 	@Column(length = 100, nullable = false, unique = true)
-	@Field(analyze = Analyze.NO)
 	private String loginId;
 
 	@Column(length = 500, nullable = false)
@@ -72,11 +53,9 @@ public class User extends DomainObject<Long> {
 			@AttributeOverride(name = "firstName", column = @Column(name = "name_first", length = 50, nullable = false)),
 			@AttributeOverride(name = "lastName", column = @Column(name = "name_last", length = 50, nullable = false)),
 	})
-	@IndexedEmbedded(includeEmbeddedObjectId = true)
 	private PersonalName name = new PersonalName();
 
 	@Column(length = 500)
-	@Field
 	private String nickname;
 
 	@Column(length = 200, nullable = false, unique = true)

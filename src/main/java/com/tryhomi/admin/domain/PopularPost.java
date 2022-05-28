@@ -5,7 +5,6 @@ package com.tryhomi.admin.domain;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.search.annotations.*;
 
 import javax.persistence.*;
 
@@ -13,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "popular_post", uniqueConstraints = @UniqueConstraint(columnNames = {"language", "type", "rank"}))
 @DynamicInsert
 @DynamicUpdate
-@Indexed
+
 public class PopularPost extends DomainObject<Long> implements Comparable<PopularPost> {
 
 	public enum Type {
@@ -24,17 +23,13 @@ public class PopularPost extends DomainObject<Long> implements Comparable<Popula
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Field(name = "sortId", analyze = Analyze.NO, index = org.hibernate.search.annotations.Index.NO)
-	@SortableField(forField = "sortId")
 	private long id;
 
 	@Column(length = 3, nullable = false)
-	@Field
 	private String language;
 
 	@Enumerated(EnumType.STRING)
 	@Column(length = 50, nullable = false)
-	@Field
 	private Type type;
 
 	@Column(nullable = false)
@@ -44,7 +39,6 @@ public class PopularPost extends DomainObject<Long> implements Comparable<Popula
 	private long views;
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@IndexedEmbedded(includeEmbeddedObjectId = true)
 	private Post post;
 
 	@Override

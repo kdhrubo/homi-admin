@@ -1,7 +1,6 @@
 package com.tryhomi.admin.domain;
 
 
-import org.hibernate.search.annotations.Field;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -13,11 +12,9 @@ import java.io.Serializable;
 public class CustomFieldOption implements Serializable {
 
 	@Column(length = 200, nullable = false)
-	@Field
 	private String name;
 
 	@Column(length = 3, nullable = false)
-	@Field
 	private String language;
 
 	public String getName() {

@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.search.annotations.Field;
+
 
 import javax.persistence.*;
 
@@ -23,12 +23,10 @@ public class BlogLanguage extends DomainObject<Long> {
 	private Blog blog;
 
 	@Column(length = 3, nullable = false)
-	@Field
 	private String language;
 
 	@Lob
 	@Column(length = 300, nullable = false)
-	@Field
 	private String title;
 
 	public Long getId() {
