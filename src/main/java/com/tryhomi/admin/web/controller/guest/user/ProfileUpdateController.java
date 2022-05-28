@@ -20,7 +20,7 @@ import com.tryhomi.admin.support.AuthorizedUser;
 
 
 
-@Controller
+//@Controller
 @RequestMapping("/settings/profile")
 public class ProfileUpdateController {
 

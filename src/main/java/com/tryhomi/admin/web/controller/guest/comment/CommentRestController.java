@@ -37,7 +37,7 @@ import com.tryhomi.admin.web.support.RestValidationErrorModel;
 
 
 
-@RestController
+//@RestController
 @RequestMapping("/comments")
 public class CommentRestController {
 

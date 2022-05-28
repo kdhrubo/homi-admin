@@ -22,7 +22,7 @@ import com.tryhomi.admin.web.support.HttpNotFoundException;
 import java.util.Iterator;
 import java.util.List;
 
-@Controller
+@Controller("adminArticleDescribeController")
 @RequestMapping(value="/{language}/articles/describe", method=RequestMethod.GET)
 public class ArticleDescribeController {
 

@@ -35,7 +35,7 @@ import com.tryhomi.admin.support.AuthorizedUser;
 
 
 
-@Controller
+//@Controller
 @RequestMapping("/settings/password")
 public class PasswordUpdateController {
 

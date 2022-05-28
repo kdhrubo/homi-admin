@@ -26,7 +26,7 @@ import com.tryhomi.admin.web.support.Pagination;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
-@Controller
+//@Controller
 public class ArticleIndexController {
 
 //	/article/[:yyyy]/[:mm]/[:dd]/[:code]

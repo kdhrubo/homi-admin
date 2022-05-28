@@ -37,7 +37,7 @@ import com.tryhomi.admin.service.UserService;
 
 import java.time.LocalDateTime;
 
-@Controller
+//@Controller
 @RequestMapping("/password-reset")
 public class PasswordResetController {
 

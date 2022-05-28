@@ -18,7 +18,7 @@ import com.tryhomi.admin.service.SignupService;
 
 import javax.validation.Valid;
 
-@Controller
+//@Controller
 @RequestMapping("/signup")
 public class SignupController {
 
