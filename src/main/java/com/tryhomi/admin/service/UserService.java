@@ -61,26 +61,26 @@ public class UserService {
 	@Autowired
 	private BlogService blogService;
 
-	@Autowired
+	//@Autowired
 	private MessageCodesResolver messageCodesResolver;
 
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
-	@Autowired
+	//@Autowired
 	private JavaMailSender mailSender;
 
-	@Autowired
-	@Qualifier("emailTemplateEngine")
+	//@Autowired
+	//@Qualifier("emailTemplateEngine")
 	private TemplateEngine templateEngine;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	@Autowired
 	private Environment environment;
 
-	@Autowired
+	//@Autowired
 	private MailProperties mailProperties;
 
 	@Resource

@@ -35,10 +35,10 @@ public class CategoryRestController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@Autowired
+	//@Autowired
 	private CategoryUtils categoryUtils;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	private static Logger logger = LoggerFactory.getLogger(CategoryRestController.class);

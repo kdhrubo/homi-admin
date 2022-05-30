@@ -23,7 +23,7 @@ public class CustomFieldRestController {
 	@Autowired
 	private CustomFieldService customFieldService;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	private static Logger logger = LoggerFactory.getLogger(CustomFieldRestController.class);

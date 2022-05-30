@@ -44,7 +44,7 @@ public class TagService {
 	private TagRepository tagRepository;
 	@Resource
 	private ArticleRepository articleRepository;
-	@Autowired
+	//@Autowired
 	private MessageCodesResolver messageCodesResolver;
 	@Autowired
 	private PlatformTransactionManager transactionManager;

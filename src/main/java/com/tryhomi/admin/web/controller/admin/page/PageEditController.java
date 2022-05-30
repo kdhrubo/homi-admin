@@ -61,10 +61,10 @@ public class PageEditController {
 	@Autowired
 	private CustomFieldService customFieldService;
 
-	@Autowired
+	//@Autowired
 	private CategoryUtils categoryUtils;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	@ModelAttribute("page")

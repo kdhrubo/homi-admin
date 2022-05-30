@@ -31,7 +31,7 @@ public class CustomFieldBulkDeleteController {
 
 	@Autowired
 	private CustomFieldService customFieldService;
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 	
 	private static Logger logger = LoggerFactory.getLogger(CustomFieldBulkDeleteController.class);

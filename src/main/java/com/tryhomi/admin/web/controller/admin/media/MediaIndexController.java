@@ -19,7 +19,7 @@ public class MediaIndexController {
 
 	@Autowired
 	private MediaService mediaService;
-	@Autowired
+	//@Autowired
 	private WallRideProperties wallRideProperties;
 
 	@RequestMapping

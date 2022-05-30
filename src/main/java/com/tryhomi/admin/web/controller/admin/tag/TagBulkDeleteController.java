@@ -45,7 +45,7 @@ public class TagBulkDeleteController {
 
 	@Autowired
 	private TagService tagService;
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 	
 	private static Logger logger = LoggerFactory.getLogger(TagBulkDeleteController.class);

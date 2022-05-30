@@ -59,13 +59,13 @@ public class PageService {
 	@Resource
 	private MediaRepository mediaRepository;
 
-	@Autowired
+	//@Autowired
 	private MessageCodesResolver messageCodesResolver;
 
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
-	@Autowired
+	//@Autowired
 	private WallRideProperties wallRideProperties;
 
 	@PersistenceContext

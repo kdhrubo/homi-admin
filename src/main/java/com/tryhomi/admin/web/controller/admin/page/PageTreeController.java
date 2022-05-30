@@ -35,7 +35,7 @@ public class PageTreeController {
 	@Autowired
 	private PageService pageService;
 
-	@Autowired
+	//@Autowired
 	private PageUtils pageUtils;
 
 	@ModelAttribute("form")

@@ -24,7 +24,7 @@ public class CategoryIndexController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@Autowired
+	//@Autowired
 	private CategoryUtils categoryUtils;
 
 	@Autowired

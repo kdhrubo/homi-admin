@@ -31,7 +31,7 @@ public class CustomFieldCreateController {
 	@Autowired
 	private CustomFieldService customfieldService;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	@ModelAttribute("fieldTypes")

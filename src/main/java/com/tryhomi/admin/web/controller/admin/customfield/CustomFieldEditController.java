@@ -47,7 +47,7 @@ public class CustomFieldEditController {
 	@Autowired
 	private CustomFieldService customFieldService;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	@ModelAttribute("fieldTypes")

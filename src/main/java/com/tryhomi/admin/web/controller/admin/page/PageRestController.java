@@ -35,10 +35,10 @@ public class PageRestController {
 	@Autowired
 	private PageService pageService;
 
-	@Autowired
+	//@Autowired
 	private PageUtils pageUtils;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	private static Logger logger = LoggerFactory.getLogger(PageRestController.class);

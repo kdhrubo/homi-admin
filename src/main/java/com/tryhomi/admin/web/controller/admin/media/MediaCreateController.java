@@ -22,7 +22,7 @@ public class MediaCreateController {
 
 	@Autowired
 	private MediaService mediaService;
-	@Autowired
+	//@Autowired
 	private WallRideProperties wallRideProperties;
 
 	@RequestMapping(method=RequestMethod.POST)

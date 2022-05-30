@@ -57,13 +57,13 @@ public class PageCreateController {
 	@Autowired
 	private PageService pageService;
 
-	@Autowired
+	//@Autowired
 	private CategoryUtils categoryUtils;
 
 	@Autowired
 	private CustomFieldService customFieldService;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	@ModelAttribute("form")

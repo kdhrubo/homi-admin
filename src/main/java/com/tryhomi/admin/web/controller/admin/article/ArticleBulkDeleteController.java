@@ -46,7 +46,7 @@ public class ArticleBulkDeleteController {
 	@Autowired
 	private ArticleService articleService;
 	
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 	
 	private static Logger logger = LoggerFactory.getLogger(ArticleBulkDeleteController.class);

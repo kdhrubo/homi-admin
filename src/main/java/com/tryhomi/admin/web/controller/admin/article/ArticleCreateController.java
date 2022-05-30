@@ -43,13 +43,13 @@ public class ArticleCreateController {
 	@Autowired
 	private ArticleService articleService;
 
-	@Autowired
+	//@Autowired
 	private CategoryUtils categoryUtils;
 
 	@Autowired
 	private CustomFieldService customFieldService;
 
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	@ModelAttribute("form")

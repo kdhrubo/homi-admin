@@ -43,16 +43,16 @@ import java.util.*;
 @Transactional(rollbackFor=Exception.class)
 public class PostService {
 
-	@Autowired
+	//@Autowired
 	private CacheManager cacheManager;
 	@Autowired
 	private ServletContext servletContext;
 
-	@Autowired
+	//@Autowired
 	private JobLauncher jobLauncher;
-	@Autowired
+	//@Autowired
 	private JobExplorer jobExplorer;
-	@Autowired
+	//@Autowired
 	private Job updatePostViewsJob;
 
 	@Autowired

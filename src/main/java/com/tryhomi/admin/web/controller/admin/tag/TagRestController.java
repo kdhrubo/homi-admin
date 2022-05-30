@@ -34,7 +34,7 @@ public class TagRestController {
 	private TagService tagService;
 	@Autowired
 	private ArticleService articleService;
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 
 	private static Logger logger = LoggerFactory.getLogger(TagRestController.class);

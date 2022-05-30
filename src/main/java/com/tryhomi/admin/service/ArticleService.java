@@ -5,8 +5,7 @@ import com.tryhomi.admin.autoconfigure.WallRideProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
+
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -63,13 +62,13 @@ public class ArticleService {
 	@Resource
 	private MediaRepository mediaRepository;
 
-	@Autowired
-	private MessageCodesResolver messageCodesResolver;
+	//@Autowired
+	//private MessageCodesResolver messageCodesResolver;
 
 	@Autowired
 	private PlatformTransactionManager transactionManager;
 
-	@Autowired
+	//@Autowired
 	private WallRideProperties wallRideProperties;
 
 	@PersistenceContext
@@ -176,7 +175,8 @@ public class ArticleService {
 		List<Media> medias = new ArrayList<>();
 		if (StringUtils.hasText(request.getBody())) {
 //			Blog blog = blogService.getBlogById(Blog.DEFAULT_ID);
-			String mediaUrlPrefix = wallRideProperties.getMediaUrlPrefix();
+			//String mediaUrlPrefix = wallRideProperties.getMediaUrlPrefix();
+			String mediaUrlPrefix = "";
 			Pattern mediaUrlPattern = Pattern.compile(String.format("%s([0-9a-zA-Z\\-]+)", mediaUrlPrefix));
 			Matcher mediaUrlMatcher = mediaUrlPattern.matcher(request.getBody());
 			while (mediaUrlMatcher.find()) {
@@ -548,8 +548,8 @@ public class ArticleService {
 					.language(bulkDeleteRequest.getLanguage())
 					.build();
 
-			final BeanPropertyBindingResult r = new BeanPropertyBindingResult(deleteRequest, "request");
-			r.setMessageCodesResolver(messageCodesResolver);
+			//final BeanPropertyBindingResult r = new BeanPropertyBindingResult(deleteRequest, "request");
+			//r.setMessageCodesResolver(messageCodesResolver);
 
 			TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
 			transactionTemplate.setPropagationBehavior(TransactionTemplate.PROPAGATION_REQUIRES_NEW);
@@ -558,9 +558,11 @@ public class ArticleService {
 				article = transactionTemplate.execute(new TransactionCallback<Article>() {
 					public Article doInTransaction(TransactionStatus status) {
 						try {
-							return deleteArticle(deleteRequest, r);
+							//return deleteArticle(deleteRequest, r);
+
+							return null;
 						}
-						catch (BindException e) {
+						catch (Exception e) {
 							throw new RuntimeException(e);
 						}
 					}
@@ -568,8 +570,8 @@ public class ArticleService {
 				articles.add(article);
 			}
 			catch (Exception e) {
-				logger.debug("Errors: {}", r);
-				result.addAllErrors(r);
+				logger.debug("Errors: {}", e);
+				//result.addAllErrors(r);
 			}
 		}
 		return articles;

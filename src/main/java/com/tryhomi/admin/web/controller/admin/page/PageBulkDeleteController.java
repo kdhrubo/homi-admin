@@ -45,7 +45,7 @@ public class PageBulkDeleteController {
 	@Autowired
 	private PageService pageService;
 	
-	@Autowired
+	//@Autowired
 	private MessageSourceAccessor messageSourceAccessor;
 	
 	private static Logger logger = LoggerFactory.getLogger(PageBulkDeleteController.class);

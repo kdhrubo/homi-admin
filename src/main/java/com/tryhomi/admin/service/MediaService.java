@@ -24,7 +24,7 @@ public class MediaService {
 	@Autowired
 	private ResourceLoader resourceLoader;
 
-	@Autowired
+	//Autowired
 	private WallRideProperties wallRideProperties;
 
 	@Autowired
