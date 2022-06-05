@@ -2,34 +2,31 @@
 
 package com.tryhomi.admin.domain;
 
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.SortNatural;
+
+
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.util.DigestUtils;
 
 import javax.persistence.*;
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDateTime;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 @Entity
-@NamedEntityGraphs({
-		@NamedEntityGraph(name = User.SHALLOW_GRAPH_NAME,
-				attributeNodes = {
-						@NamedAttributeNode("roles")}
-		),
-		@NamedEntityGraph(name = User.DEEP_GRAPH_NAME,
-				attributeNodes = {
-						@NamedAttributeNode("roles")})
-})
 @Table(name = "user")
-@DynamicInsert
-@DynamicUpdate
-@SuppressWarnings("serial")
-public class User extends DomainObject<Long> {
+@EntityListeners(AuditingEntityListener.class)
+@TypeDefs({
 
-	public static final String SHALLOW_GRAPH_NAME = "USER_SHALLOW_GRAPH";
-	public static final String DEEP_GRAPH_NAME = "USER_DEEP_GRAPH";
+		@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+})
+
+public class User {
+
 
 	public enum Role {
 		ADMIN,
@@ -65,90 +62,29 @@ public class User extends DomainObject<Long> {
 	@Column
 	private String description;
 
-	@ElementCollection
-	@SortNatural
-	@JoinTable(name = "user_role")
-	@Enumerated(EnumType.STRING)
-	@Column(name = "role", length = 20, nullable = false)
+
+	@Type(type = "jsonb")
+	@Column(name = "user_role", columnDefinition = "jsonb")
 	private SortedSet<Role> roles = new TreeSet<>();
 
-	@Override
-	public Long getId() {
-		return id;
-	}
+	@Column(nullable = false)
+	private LocalDateTime createdAt = LocalDateTime.now();
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@Column(length = 100)
+	private String createdBy;
 
-	public String getLoginId() {
-		return loginId;
-	}
+	@Column(nullable = false)
+	private LocalDateTime updatedAt = LocalDateTime.now();
 
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
-	}
+	@Column(length = 100)
+	private String updatedBy;
 
-	public String getLoginPassword() {
-		return loginPassword;
-	}
 
-	public void setLoginPassword(String loginPassword) {
-		this.loginPassword = loginPassword;
-	}
-
-	public PersonalName getName() {
-		return name;
-	}
-
-	public void setName(PersonalName name) {
-		this.name = name;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public SortedSet<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(SortedSet<Role> roles) {
-		this.roles = roles;
-	}
 
 	public String getGravatarUrl(int size) throws UnsupportedEncodingException {
-		String hash = DigestUtils.md5DigestAsHex(getEmail().getBytes("CP1252"));
+		String hash = DigestUtils.md5DigestAsHex(email.getBytes("CP1252"));
 		return String.format("https://secure.gravatar.com/avatar/%s?size=%d&d=mm", hash, size);
 	}
 
-	@Override
-	public String print() {
-		return (getName() != null) ? getName().toString() : "";
-	}
 
-	@Override
-	public String toString() {
-		return (getName() != null) ? getName().toString() : "";
-	}
 }

@@ -1,7 +1,7 @@
 
 package com.tryhomi.admin.domain;
 
-import com.tryhomi.admin.support.CustomFieldValuesBridge;
+
 import org.hibernate.annotations.*;
 
 
