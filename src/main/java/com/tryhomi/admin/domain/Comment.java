@@ -2,6 +2,7 @@
 
 package com.tryhomi.admin.domain;
 
+import com.tryhomi.admin.core.domain.User;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -11,20 +12,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@NamedEntityGraphs({
-		@NamedEntityGraph(name = Comment.SHALLOW_GRAPH_NAME,
-				attributeNodes = {
-						@NamedAttributeNode("author")}
-		),
-		@NamedEntityGraph(name = Comment.DEEP_GRAPH_NAME,
-				attributeNodes = {
-						@NamedAttributeNode("author")})
-})
 @Table(name = "comment")
-@DynamicInsert
-@DynamicUpdate
-
-@SuppressWarnings("serial")
 public class Comment extends DomainObject<Long> implements Comparable<Comment> {
 
 	public static final String SHALLOW_GRAPH_NAME = "COMMENT_SHALLOW_GRAPH";
