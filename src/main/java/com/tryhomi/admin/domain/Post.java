@@ -2,7 +2,6 @@
 package com.tryhomi.admin.domain;
 
 
-import com.tryhomi.admin.core.domain.User;
 import org.hibernate.annotations.*;
 
 

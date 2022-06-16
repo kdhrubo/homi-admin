@@ -1,4 +1,4 @@
-package com.tryhomi.admin.core.domain;
+package com.tryhomi.admin.domain;
 
 
 import lombok.AllArgsConstructor;

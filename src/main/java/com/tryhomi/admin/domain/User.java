@@ -1,6 +1,6 @@
-package com.tryhomi.admin.core.domain;
+package com.tryhomi.admin.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -73,10 +73,6 @@ public class User implements Serializable {
 
 	@Column(name = "last_login_date")
 	private LocalDateTime lastLoginDate;
-
-	@OneToOne
-	@JoinColumn(name = "tenant_id", referencedColumnName = "id")
-	private Tenant tenant;
 
 	@Column(name = "verification_token")
 	private String verificationToken;

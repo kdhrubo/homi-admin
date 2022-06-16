@@ -2,10 +2,7 @@
 
 package com.tryhomi.admin.domain;
 
-import com.tryhomi.admin.core.domain.User;
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 
 import javax.persistence.*;
