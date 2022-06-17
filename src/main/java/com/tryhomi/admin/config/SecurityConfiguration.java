@@ -24,6 +24,7 @@ class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
                 .ignoring()
                 .antMatchers("/resources/**")
                 .antMatchers("/webjars/**")
+                .antMatchers("/static/js/**")
                 .antMatchers("/setup**")
                 .antMatchers("/signup**");
         // @formatter:on
