@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/homi
+    username: grabdoc
+    password: postgres2020
+
+
+
+logging:
+  level:
+    org.springframework.security: debug
+    org.springframework.web: debug
+    org.springframework.jdbc: info
+    org.springframework.session: info
+    org.springframework: info
+    com.getarjun: info
+    net.ttddyy.dsproxy.listener: info
+    # org.hibernate.SQL: trace
+    # org.hibernate.type.descriptor.sql.BasicBinder: info
+    # sql: info
+  file: ./homi-admin.log
